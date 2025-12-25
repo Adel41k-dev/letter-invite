@@ -7,35 +7,35 @@
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
-background:#5a0f1b;transition:background 1.5s ease;overflow:hidden;
-font-family:'Times New Roman',serif
+    margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
+    background:#5a0f1b;transition:background 1.5s ease;overflow:hidden;
+    font-family:'Times New Roman',serif
 }
 #intro{
-position:absolute;background:#7b1525;color:#fff;padding:20px;
-max-width:92%;border-radius:16px;text-align:center;
-box-shadow:0 0 30px rgba(0,0,0,.4);z-index:10
+    position:absolute;background:#7b1525;color:#fff;padding:20px;
+    max-width:92%;border-radius:16px;text-align:center;
+    box-shadow:0 0 30px rgba(0,0,0,.4);z-index:10
 }
 #intro button{
-margin-top:16px;padding:12px 28px;border:none;border-radius:26px;
-background:#ffb3c6;color:#5a0f1b;font-size:18px;cursor:pointer;
+    margin-top:16px;padding:12px 28px;border:none;border-radius:26px;
+    background:#ffb3c6;color:#5a0f1b;font-size:18px;cursor:pointer;
 }
 #letter{
-display:none;width:94%;max-width:560px;height:75%;
-background:#fdf6ee;border-radius:10px;position:relative;
-box-shadow:0 0 40px rgba(0,0,0,.3);overflow:hidden
+    display:none;width:94%;max-width:560px;height:75%;
+    background:#fdf6ee;border-radius:10px;position:relative;
+    box-shadow:0 0 40px rgba(0,0,0,.3);overflow:hidden
 }
 #seal{
-width:72px;height:72px;background:crimson;border-radius:50%;
-position:absolute;bottom:16px;right:16px;cursor:pointer;
-box-shadow:inset 0 0 10px rgba(0,0,0,.4);transition:transform 0.3s;
+    width:72px;height:72px;background:crimson;border-radius:50%;
+    position:absolute;bottom:16px;right:16px;cursor:pointer;
+    box-shadow:inset 0 0 10px rgba(0,0,0,.4);transition:transform 0.3s;
 }
 #seal:hover{transform:rotate(-15deg) scale(1.1);}
 #paper{
-display:none;position:absolute;inset:20px;background:#fff;
-padding:28px;border-radius:6px;
-box-shadow:inset 0 0 10px rgba(0,0,0,.15);
-animation:open 1.6s ease forwards
+    display:none;position:absolute;inset:20px;background:#fff;
+    padding:28px;border-radius:6px;
+    box-shadow:inset 0 0 10px rgba(0,0,0,.15);
+    animation:open 1.6s ease forwards
 }
 @keyframes open{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .letter-text{font-size:18px;line-height:1.6;text-align:left}
@@ -50,7 +50,6 @@ animation:open 1.6s ease forwards
 </head>
 <body>
 
-
 <div id="intro">
 <h3>💌</h3>
 <p>
@@ -64,5 +63,58 @@ animation:open 1.6s ease forwards
 <button onclick="start()">Продолжить</button>
 </div>
 
-
 <div id="letter">
+    <div id="seal" onclick="openLetter()"></div>
+    <div id="paper">
+        <div class="letter-text">
+            <p>Я долго думал, как сказать это правильно,
+            и решил написать тебе это письмо.</p>
+            <p>Ты пойдёшь завтра со мной на свидание
+            (если его так можно назвать)?</p>
+        </div>
+        <div class="buttons">
+            <button class="yes" onclick="yes()">Да 💕</button>
+            <button class="no" onclick="no()">Нет 😔</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function start(){
+    document.getElementById('intro').style.display='none';
+    document.body.style.background='#ffb6c1';
+    document.getElementById('letter').style.display='block';
+}
+function openLetter(){
+    document.getElementById('paper').style.display='block';
+}
+function yes(){
+    for(let i=0;i<18;i++){
+        let f=document.createElement('div');
+        f.className='firework';
+        f.style.left=Math.random()*100+'vw';
+        f.style.top=Math.random()*100+'vh';
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    }
+    document.getElementById('paper').innerHTML=`
+    <h2 style="text-align:center">💖 Наш маленький план 💖</h2>
+    <p class="letter-text">
+    Я немного бедный, но искренний. Главное для меня — быть рядом с тобой.
+    </p>
+    <ul class="letter-text">
+        <li>Прогуляться по Меге</li>
+        <li>Покушать там что‑нибудь вкусное</li>
+        <li>Сделать фотки в фотобудке 📸</li>
+        <li>И если получится — сходить покататься на коньках ⛸️</li>
+    </ul>
+    <div class="signature">Адэль</div>
+    `;
+}
+function no(){
+    document.getElementById('paper').innerHTML='<h1 style="text-align:center">😢</h1><p style="text-align:center">Мне немного грустно…</p>';
+}
+</script>
+
+</body>
+</html>
